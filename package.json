@@ -1,0 +1,23 @@
+{
+  "name": "rss-feed-aggregator-backend",
+  "version": "1.0.0",
+  "description": "a backend to aggregate RSS/Atom feeds from different sources then process and save them into a database",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bach Tran",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "8.0.0",
+    "express": "4.17.1",
+    "mongodb": "3.2.7",
+    "rss-parser": "3.7.1"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.17.3"
+  }
+}
