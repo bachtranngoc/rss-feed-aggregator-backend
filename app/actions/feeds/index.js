@@ -7,7 +7,7 @@ const updateFeeds = (req, res) => {
     const dbUser = process.env.DB_USER;
     const dbPassword = process.env.DB_PASSWORD;
     const url = `mongodb+srv://${dbUser}:${dbPassword}@cluster0-vpjdh.mongodb.net/test?retryWrites=true&w=majority`;
-    const client = new MongoClient(url);
+    const client = new MongoClient(url, { useNewUrlParser: true });
     const lastUpdateCheck = new Date();
     var isValidRequest = true;
     var dataFromProviders = [];
@@ -26,7 +26,7 @@ const updateFeeds = (req, res) => {
                 console.log('last update time: ', lastUpdateTime);
                 console.log('current time: ', currentTime);
                 console.log('Minutes from last update: ', durationInMinutes);
-                if (durationInMinutes < config.MINUTES_BETWEEN_UPDATES) {
+                if (durationInMinutes < config.minutesBetweenUpdates) {
                     const errorMessage = 'shortest interval for update requests is 10 minutes';
                     res.status(429).send({
                         error: errorMessage
@@ -53,11 +53,11 @@ const updateFeeds = (req, res) => {
                 }
             });
             return Promise.all([
-                parser.parseURL(config.FEED1),
-                parser.parseURL(config.FEED2),
-                parser.parseURL(config.FEED3),
-                parser.parseURL(config.FEED4),
-                parser.parseURL(config.FEED5),
+                parser.parseURL(config.feed1),
+                parser.parseURL(config.feed2),
+                parser.parseURL(config.feed3),
+                parser.parseURL(config.feed4),
+                parser.parseURL(config.feed5),
                 db.collection('feedRecords').find({}).toArray()]);
         }).then((result) => {
             //insert records which are new and pubDate < 30 days

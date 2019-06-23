@@ -9,6 +9,6 @@ app.use(queue({
 }));
 app.use(routes);
 
-app.listen(config.PORT, config.HOST_ADDRESS, () => {
-    console.log(`Server is listening on host ${config.HOST_ADDRESS}, port ${config.PORT}`);
+app.listen(config.port, config.hostAddress, () => {
+    console.log(`Server is listening on host ${config.hostAddress}, port ${config.port}`);
 });
